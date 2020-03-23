@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TypingSpeed</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="css/strap.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="jquery/jquery.js"></script>
+	<script type="text/javascript" src="jquery/bootstrap.bundle.js"></script>
+	<script type="text/javascript" src="jquery/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="jquery/bootstrap.min.js"></script>
+	<script type="text/javascript" src="jquery/bootstrap.js"></script>
+	<script type="text/javascript" src="jquery/tt_slideshow.js"></script>
+</head>
+<body onload="timestarted()">
+	<section class="main container">
+		<div class="arrayWriter"></div>
+		<div class="startDiv">
+			<h4>Start Now</h4><br>
+			<P class="starttimetop">0:0</P><br>
+			<button class="btn start">Start</button><br>
+			<button class="btn stop">Stop</button>
+			<br><br>
+			<table border="2">
+				<tr>
+					<td colspan="2" style="font-size: 15px;font-weight: bold;color: blue;">Result</td>
+				</tr>
+				<tr>
+					<td>Start time</td>	
+					<td class="starttimetd">0:0</td>											
+				</tr>
+
+				<tr>
+					<td>End time</td>
+					<td class="endtimetd">0:0</td>
+				</tr>
+
+				<tr>
+					<td>Toatal  time</td>
+					<td class="toataltimetd">0:0</td>
+				</tr>
+
+				<tr>
+					<td>Word/M</td>
+					<td class="wordmtd">0</td>
+				</tr>
+				<tr>
+					<td>Type word</td>
+					<td class="typeWord">0</td>
+				</tr>
+				<tr>
+					<td>Correct word</td>
+					<td class="correctword">0</td>
+				</tr>
+			</table>
+		</div>
+
+		<div class="arrayWriting">
+			<p>Type here....</p>
+			<textarea cols="20" rows="8" class="typingplace" style="width: 94%;height: 35vh;" disabled="true" placeholder="type here....."></textarea>
+		</div>
+
+		
+	</section>	
+</body>
+</html>
+<script type="text/javascript">
+	let sentence=[
+		"asdf jkl; asdf ;lkj asdf ;lkj asdf ;lkj asdf ;lkj asdf ;lkj asdf ;lkj asdf ;lkjasdf  adsfl;kj asdf ;lkj asdf ;lkj asfd ;lkj asdf ;lkj asdf ;ljk asdf asdf ;lkj asdf ;kljasdf asdfg ;lkjh asdfg ;lkjh asdfg ;lkjh asdfg ;lkj;h asdfg ;lkjh asdfg ;lkjh asdfh ;lkjg asdfh ;lkjg asdfh ;lkjg aa jj ss kk dd ll ;; ff aj sk dl f; ;a ls kd jf a; al sk dj jf kd ls ;a ka la ;a sj sj sk sk sl sl s; s; dj dj dk dl a; ks",
+
+		"qwer poiu qwer poiu qwer poiu qwer poiu qwer poiu qwer poiu qwer poiu qwer poiu qwer poiu qwer poiu qwer poiu qwer poiu qwer poiu qwer poiu qwer poiu qwer poiu qp wo ei ru qo qi qp qu pq ow ie ur pe pr pq rp ri ro qwert piouy qwert poiuy qwert poiuy qwert poiuy qwert poiuy qp wo ei ru ty qwert poiuy uq uw ue ur ir ie iw iq or oe ow oq pq pw pe pr yq yq yq tu tu tu",
+
+			"asdf1 ;klj8 asdf1 ;lkj8 asdf1 ;lkj8 asdf1 ;lkj8 asdf2 ;lkj0 asdf3 ;lkj9 asdf4 l;kj7 asdf5 ;lkj6 as345 ;lkj098 asui erjk qwpo ;lkj asdf asdf ;lkj asdf1 ;klj8 asdf1 ;lkj8 asdf1 ;lkj8 asdf1 ;lkj8 asdf2 ;lkj0 asdf3 ;lkj9 asdf4 l;kj7 asdf5 ;lkj6 as345 ;lkj098 asui erjk qwpo ;lkj asdf asdf ;lkj ",
+
+			"How is this possible my dear friend its a very very hard work its not possible called is blck fox of the country in, our comprehinssion information technology and know about us , called is blck fox of the country in, our comprehinssion information technology and know about us ,"]
+	var arrayWriter=document.querySelector('.arrayWriter');
+	var startbtn=document.querySelector('.start');
+	var stopbtn=document.querySelector('.stop');
+	var typingplace=document.querySelector('.typingplace');
+	var starttimetd=document.querySelector('.starttimetd');
+	var endtimetd=document.querySelector('.endtimetd');
+	var toataltimetd=document.querySelector('.toataltimetd');
+	var wordmtd=document.querySelector('.wordmtd');
+	var typeWord=document.querySelector('.typeWord');
+	var correctword=document.querySelector('.correctword');
+	var starttimetop=document.querySelector('.starttimetop');
+	var givetimep=document.querySelector('.givetimep');
+	let starttime,endtime;
+	// document.addEventListener('keydown',keydown);
+	// ///////////////////////////////////////////////
+
+	// function keydown(e){
+	// 	e.preventDefault();
+	// 	console.log(e.key);
+	// 	if (e.key=='Enter') {
+	// 	typingplace.disabled=false;
+	// 	var randomeshow=Math.floor(Math.random()*sentence.length);
+	// 	arrayWriter.innerText=sentence[randomeshow];
+	// 	endtimetd.innerText="";
+	// 	toataltimetd.innerText="";
+	// 	wordmtd.innerText="";
+	// 	typeWord.innerText="";
+	// 	correctword.innerText="";
+	// 	var date= new Date();
+	// 	starttime=date.getTime();
+	// 	hrs=date.getHours();
+	// 	min=date.getMinutes();
+	// 	sec=date.getSeconds();
+	// 	starttimetd.innerText=hrs+":"+min+":"+sec;
+	// 	typingplace.innerText=e.key;
+	// 	}
+	// }
+	const playtyping= () =>{
+		var randomeshow=Math.floor(Math.random()*sentence.length);
+		arrayWriter.innerText=sentence[randomeshow];
+		endtimetd.innerText="";
+		toataltimetd.innerText="";
+		wordmtd.innerText="";
+		typeWord.innerText="";
+		correctword.innerText="";
+		var date= new Date();
+		starttime=date.getTime();
+		hrs=date.getHours();
+		min=date.getMinutes();
+		sec=date.getSeconds();
+		starttimetd.innerText=hrs+":"+min+":"+sec;
+	
+	}
+	
+	startbtn.addEventListener('click',function(){
+		typingplace.disabled=false;
+		typingplace.value="";
+		playtyping();
+		timecounter();
+		window.requestAnimationFrame(timestarted);
+	})
+	function timestarted(){
+		var date= new Date();
+		hrs=date.getHours();
+		sec=date.getSeconds();
+		min=date.getMinutes();
+		mil=date.getMilliseconds();
+		starttimetop.innerText=hrs+":"+min+":"+sec+":"+mil;
+		window.requestAnimationFrame(timestarted);
+	}
+	//////////////////////////////////////////////////////////
+	const stoptyping= () =>{
+		var date= new Date();
+		endtime=date.getTime();
+		hrs=date.getHours();
+		min=date.getMinutes();
+		sec=date.getSeconds();
+		if(sec<10){
+			sec="0"+sec;
+		}
+		if(min<10){
+			min="0"+sec;
+		}
+		endtimetd.innerText=hrs+":"+min+":"+sec;
+		var toataltime=Math.floor(((endtime - starttime)/1000)*1);
+		toataltimetd.innerText=toataltime+" Sec";
+		console.log(toataltime);
+
+		var toatalstr=typingplace.value;
+		var wordcount=wordCounter(toatalstr);
+		var speed=Math.floor((wordcount/toataltime)*60);
+		wordmtd.innerText=speed;
+
+		if (typingplace.value=="") {
+			wordmtd.innerText=0;
+		}
+
+		compareWord(arrayWriter.innerText,toatalstr);
+
+	}
+
+	const compareWord=(str1,str2)=>{
+
+		var word1=str1.split(" ");
+		var word2=str2.split(" ");
+
+		var cnt=0;
+
+		word1.forEach(function(item,index){
+			if (item==word2[index]) {
+				cnt++;
+			}
+		})
+		correctword.innerText=cnt;
+		
+	}
+	const wordCounter= (str) =>{
+		var responce=str.split(" ").length;
+		typeWord.innerText=responce;
+		if (typingplace.value=="") {
+			typeWord.innerText=0;
+		}
+		
+		return responce;
+		
+
+	}
+	stopbtn.addEventListener('click',function(){
+		typingplace.disabled=true;
+		stoptyping();
+	})
+	///////////////////////////////////////////////////////////////
+</script>
